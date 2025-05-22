@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 import org.openqa.selenium.chrome.ChromeOptions;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 
 public class LoginTest {
@@ -21,6 +23,7 @@ public class LoginTest {
 
     @BeforeTest
     public void setup() {
+       WebDriverManager.chromedriver().setup();
        ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");               // run headless (no UI)
         options.addArguments("--no-sandbox");             // bypass OS security model (required in CI)
