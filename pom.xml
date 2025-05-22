@@ -12,9 +12,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <selenium.version>4.14.1</selenium.version>
-        <testng.version>7.9.0</testng.version>
-        <webdrivermanager.version>5.6.3</webdrivermanager.version>
+        <selenium.version>4.25.0</selenium.version>
+        <testng.version>7.10.2</testng.version>
+        <webdrivermanager.version>5.9.2</webdrivermanager.version>
     </properties>
 
     <dependencies>
@@ -33,7 +33,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- WebDriverManager for automatic driver management -->
+        <!-- WebDriverManager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
@@ -44,15 +44,8 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.9</version>
+            <version>2.0.16</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- Chrome DevTools Support (using highest available version for 4.14.1) -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v122</artifactId>
-            <version>${selenium.version}</version>
         </dependency>
     </dependencies>
 
@@ -62,7 +55,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.13.0</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
@@ -73,14 +66,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>3.5.0</version>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <argLine>
-                        --illegal-access=permit
-                    </argLine>
+                    <parallel>none</parallel>
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
+                    <argLine>--illegal-access=permit</argLine>
                 </configuration>
             </plugin>
         </plugins>
