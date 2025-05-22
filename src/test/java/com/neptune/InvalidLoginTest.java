@@ -31,26 +31,23 @@ public class InvalidLoginTest {
     private final String PASSWORD = "Password2342@710";
 
     @BeforeTest
-    public void setup() throws IOException {
-        // Auto-download matching ChromeDriver
+    public void setup() {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments(
-            "--no-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-gpu",
-            "--remote-allow-origins=*",
-            "--headless"  // Add for CI (no GUI)
-        );
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--remote-allow-origins=*");
+    
+        Path tempDir = Files.createTempDirectory("chrome_user_data_");
+        options.addArguments("--user-data-dir=" + tempDir.toString());
 
-        // Unique temp dir per test
-        Path tempDir = Files.createTempDirectory("chrome_" + UUID.randomUUID());
-        options.addArguments("--user-data-dir=" + tempDir.toAbsolutePath());
+        System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
+        System.setProperty("webdriver.chrome.verboseLogging", "true");
 
         driver = new ChromeDriver(options);
     }
-
 
     // ✅ Loader wait function
     public void waitForLoaderToDisappear(WebDriver driver) {
