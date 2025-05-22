@@ -30,25 +30,26 @@ public class LoginTest {
     private final String PASSWORD = "F!khan@804621";
 
    @BeforeTest
-public void setup() {
-    WebDriverManager.chromedriver().setup();
-    ChromeOptions options = new ChromeOptions();
-    // options.addArguments("--headless");               // run headless (no UI)
-    options.addArguments("--no-sandbox");             // bypass OS security model (required in CI)
-    options.addArguments("--disable-dev-shm-usage");  // overcome resource issues in CI containers
-    options.addArguments("--disable-gpu");            // disable GPU (safe for Linux)
-    options.addArguments("--remote-allow-origins=*"); // needed for newer ChromeDriver versions
+    public void setup() throws IOException {
+        // Auto-download matching ChromeDriver
+        WebDriverManager.chromedriver().setup();
 
-    try {
-         Path tempDir = Files.createTempDirectory("chrome_" + UUID.randomUUID());
-         options.addArguments("--user-data-dir=" + tempDir.toAbsolutePath());
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments(
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+            "--remote-allow-origins=*",
+            "--headless"  // Add for CI (no GUI)
+        );
 
-    } catch (IOException e) {
-        throw new RuntimeException("Failed to create Chrome temp directory", e);
+        // Unique temp dir per test
+        Path tempDir = Files.createTempDirectory("chrome_" + UUID.randomUUID());
+        options.addArguments("--user-data-dir=" + tempDir.toAbsolutePath());
+
+        driver = new ChromeDriver(options);
     }
 
-    driver = new ChromeDriver(options);
-}
 
     // ✅ Add this reusable method
     public void waitForLoaderToDisappear(WebDriver driver) {
