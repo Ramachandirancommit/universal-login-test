@@ -3,11 +3,18 @@
 <suite name="Failed suite [AllTests]" guice-stage="DEVELOPMENT" verbose="0">
   <test thread-count="5" name="Tests(failed)" verbose="0">
     <classes>
+      <class name="com.neptune.InvalidLoginTest">
+        <methods>
+          <include name="teardown"/>
+          <include name="invalidLogin"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.neptune.InvalidLoginTest -->
       <class name="com.neptune.LoginTest">
         <methods>
           <include name="teardown"/>
           <include name="setup"/>
-          <include name="testLogin"/>
+          <include name="validLogin"/>
         </methods>
       </class> <!-- com.neptune.LoginTest -->
     </classes>

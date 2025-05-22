@@ -28,7 +28,7 @@ public class LoginTest {
     public void setup() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");               // run headless (no UI)
+        // options.addArguments("--headless");               // run headless (no UI)
         options.addArguments("--no-sandbox");             // bypass OS security model (required in CI)
         options.addArguments("--disable-dev-shm-usage");  // overcome resource issues in CI containers
         options.addArguments("--disable-gpu");            // disable GPU (safe for Linux)
