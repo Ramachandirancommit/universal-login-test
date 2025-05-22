@@ -27,21 +27,25 @@ public class LoginTest {
     private final String USERNAME = "fouzankhan.m@knackforge.com";
     private final String PASSWORD = "F!khan@804621";
 
-    @BeforeTest
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        // options.addArguments("--headless");               // run headless (no UI)
-        options.addArguments("--no-sandbox");             // bypass OS security model (required in CI)
-        options.addArguments("--disable-dev-shm-usage");  // overcome resource issues in CI containers
-        options.addArguments("--disable-gpu");            // disable GPU (safe for Linux)
-        options.addArguments("--remote-allow-origins=*"); // needed for newer ChromeDriver versions
+   @BeforeTest
+public void setup() {
+    WebDriverManager.chromedriver().setup();
+    ChromeOptions options = new ChromeOptions();
+    // options.addArguments("--headless");               // run headless (no UI)
+    options.addArguments("--no-sandbox");             // bypass OS security model (required in CI)
+    options.addArguments("--disable-dev-shm-usage");  // overcome resource issues in CI containers
+    options.addArguments("--disable-gpu");            // disable GPU (safe for Linux)
+    options.addArguments("--remote-allow-origins=*"); // needed for newer ChromeDriver versions
 
+    try {
         Path tempDir = Files.createTempDirectory("chrome_user_data_");
         options.addArguments("--user-data-dir=" + tempDir.toString());
-
-        driver = new ChromeDriver(options);
+    } catch (IOException e) {
+        throw new RuntimeException("Failed to create Chrome temp directory", e);
     }
+
+    driver = new ChromeDriver(options);
+}
 
     // ✅ Add this reusable method
     public void waitForLoaderToDisappear(WebDriver driver) {

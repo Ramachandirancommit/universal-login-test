@@ -38,8 +38,12 @@ public class InvalidLoginTest {
         options.addArguments("--disable-gpu");            // disable GPU (safe for Linux)
         options.addArguments("--remote-allow-origins=*"); // needed for newer ChromeDriver versions
 
-        Path tempDir = Files.createTempDirectory("chrome_user_data_");
-        options.addArguments("--user-data-dir=" + tempDir.toString());
+        try {
+            Path tempDir = Files.createTempDirectory("chrome_user_data_");
+            options.addArguments("--user-data-dir=" + tempDir.toString());
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create temp directory", e);
+        }
 
         driver = new ChromeDriver(options);
     }
