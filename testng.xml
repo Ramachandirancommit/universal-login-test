@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="AllTests">
+    <test name="Tests">
+        <classes>
+            <!-- <class name="com.neptune.AppTest"/> -->
+            <class name="com.neptune.LoginTest"/>
+            <class name="com.neptune.InvalidLoginTest"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [AllTests]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="5" name="Tests(failed)" verbose="0">
+    <classes>
+      <class name="com.neptune.LoginTest">
+        <methods>
+          <include name="teardown"/>
+          <include name="setup"/>
+          <include name="testLogin"/>
+        </methods>
+      </class> <!-- com.neptune.LoginTest -->
+    </classes>
+  </test> <!-- Tests(failed) -->
+</suite> <!-- Failed suite [AllTests] -->
