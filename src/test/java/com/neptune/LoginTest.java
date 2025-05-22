@@ -34,6 +34,9 @@ public class LoginTest {
         options.addArguments("--disable-gpu");            // disable GPU (safe for Linux)
         options.addArguments("--remote-allow-origins=*"); // needed for newer ChromeDriver versions
 
+        Path tempDir = Files.createTempDirectory("chrome_user_data_");
+        options.addArguments("--user-data-dir=" + tempDir.toString());
+        
         driver = new ChromeDriver(options);
     }
 

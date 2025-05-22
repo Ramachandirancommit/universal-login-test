@@ -4,7 +4,7 @@
         <classes>
             <!-- <class name="com.neptune.AppTest"/> -->
             <class name="com.neptune.LoginTest"/>
-            <!-- <class name="com.neptune.InvalidLoginTest"/> -->
+            <class name="com.neptune.InvalidLoginTest"/>
         </classes>
     </test>
 </suite>
