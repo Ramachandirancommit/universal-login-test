@@ -39,8 +39,8 @@ public class InvalidLoginTest {
         options.addArguments("--remote-allow-origins=*"); // needed for newer ChromeDriver versions
 
         try {
-            Path tempDir = Files.createTempDirectory("chrome_user_data_" + UUID.randomUUID());
-            options.addArguments("--user-data-dir=" + tempDir.toString());
+            Path tempDir = Files.createTempDirectory("chrome_" + UUID.randomUUID());
+            options.addArguments("--user-data-dir=" + tempDir.toAbsolutePath());
 
         } catch (IOException e) {
             throw new RuntimeException("Failed to create temp directory", e);
@@ -48,7 +48,7 @@ public class InvalidLoginTest {
 
         driver = new ChromeDriver(options);
     }
-    
+
     // ✅ Loader wait function
     public void waitForLoaderToDisappear(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
