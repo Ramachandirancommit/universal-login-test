@@ -24,7 +24,7 @@ import java.time.Duration;
 import static org.testng.Assert.assertTrue;
 
 public class InvalidLoginTest {
-    
+
     private WebDriver driver;
     private final String LOGIN_URL = "https://stage.universal.neptunenavigate.com/auth/login";
     private final String USERNAME = "ramachandiran4234.m@knackforge.com";
@@ -39,9 +39,14 @@ public class InvalidLoginTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
         options.addArguments("--remote-allow-origins=*");
-    
-        Path tempDir = Files.createTempDirectory("chrome_user_data_");
-        options.addArguments("--user-data-dir=" + tempDir.toString());
+
+        try {
+            Path tempDir = Files.createTempDirectory("chrome_user_data_");
+            options.addArguments("--user-data-dir=" + tempDir.toString());
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+            throw new RuntimeException("Failed to create temporary directory for Chrome user data.");
+        }
 
         System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
         System.setProperty("webdriver.chrome.verboseLogging", "true");
@@ -49,7 +54,6 @@ public class InvalidLoginTest {
         driver = new ChromeDriver(options);
     }
 
-    // ✅ Loader wait function
     public void waitForLoaderToDisappear(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("loader-wrapper")));
@@ -61,13 +65,11 @@ public class InvalidLoginTest {
         driver.findElement(By.id("email")).sendKeys(USERNAME);
         driver.findElement(By.id("password")).sendKeys(PASSWORD);
 
-        // ✅ Wait for any loader to disappear
         waitForLoaderToDisappear(driver);
 
         WebElement loginButton = driver.findElement(By.xpath("//button[span[text()='Login']]"));
         loginButton.click();
 
-        // ✅ Wait for error message to appear
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement errorMessage = wait.until(
             ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'The email and password you entered did not match our records')]"))
@@ -75,13 +77,6 @@ public class InvalidLoginTest {
 
         assertTrue(errorMessage.isDisplayed());
     }
-    try {
-    // the line of code that throws IOException
-} catch (IOException e) {
-    e.printStackTrace(); // or handle it appropriately
-}
-
-
 
     @AfterTest
     public void teardown() {
@@ -90,3 +85,4 @@ public class InvalidLoginTest {
         }
     }
 }
+
