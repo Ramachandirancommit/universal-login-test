@@ -29,7 +29,7 @@ public class LoginTest {
     private final String USERNAME = "fouzankhan.m@knackforge.com";
     private final String PASSWORD = "F!khan@804621";
 
-   @BeforeTest
+  @BeforeTest
 public void setup() {
     WebDriverManager.chromedriver().setup();
 
@@ -40,7 +40,7 @@ public void setup() {
     options.addArguments("--remote-allow-origins=*");
 
     try {
-        Path tempDir = Files.createTempDirectory("chrome_user_data_");
+        Path tempDir = Files.createTempDirectory("chrome_user_data_" + UUID.randomUUID());
         options.addArguments("--user-data-dir=" + tempDir.toString());
     } catch (IOException e) {
         e.printStackTrace();

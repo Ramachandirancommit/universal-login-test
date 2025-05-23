@@ -41,7 +41,7 @@ public void setup() {
     options.addArguments("--remote-allow-origins=*");
 
     try {
-        Path tempDir = Files.createTempDirectory("chrome_user_data_");
+        Path tempDir = Files.createTempDirectory("chrome_user_data_" + UUID.randomUUID());
         options.addArguments("--user-data-dir=" + tempDir.toString());
     } catch (IOException e) {
         e.printStackTrace();
@@ -53,6 +53,8 @@ public void setup() {
 
     driver = new ChromeDriver(options);
 }
+
+
 
     public void waitForLoaderToDisappear(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
