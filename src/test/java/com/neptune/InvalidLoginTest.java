@@ -8,7 +8,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import java.time.Duration;
 import static org.testng.Assert.*;
 
-public class LoginTest {
+public class InvalidLoginTest {
     private WebDriver driver;
     private WebDriverWait wait;
     private static final String LOGIN_URL = "https://stage.universal.neptunenavigate.com/auth/login";
@@ -61,7 +61,7 @@ public class LoginTest {
     }
 
     @Test
-    public void validLoginTest() {
+    public void invalidLoginTest() {
         // Robust page loading with retry
         loadUrlWithRetry(LOGIN_URL, 3);
         
