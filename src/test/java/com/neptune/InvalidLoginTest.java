@@ -30,29 +30,29 @@ public class InvalidLoginTest {
     private final String USERNAME = "ramachandiran4234.m@knackforge.com";
     private final String PASSWORD = "Password2342@710";
 
-    @BeforeTest
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
+   @BeforeTest
+public void setup() {
+    WebDriverManager.chromedriver().setup();
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--remote-allow-origins=*");
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--no-sandbox");
+    options.addArguments("--disable-dev-shm-usage");
+    options.addArguments("--disable-gpu");
+    options.addArguments("--remote-allow-origins=*");
 
-        try {
-            Path tempDir = Files.createTempDirectory("chrome_user_data_");
-            options.addArguments("--user-data-dir=" + tempDir.toString());
-        } catch (IOException e) {
-            e.printStackTrace(); // Handle the exception appropriately
-            throw new RuntimeException("Failed to create temporary directory for Chrome user data.");
-        }
-
-        System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
-        System.setProperty("webdriver.chrome.verboseLogging", "true");
-
-        driver = new ChromeDriver(options);
+    try {
+        Path tempDir = Files.createTempDirectory("chrome_user_data_");
+        options.addArguments("--user-data-dir=" + tempDir.toString());
+    } catch (IOException e) {
+        e.printStackTrace();
+        throw new RuntimeException("Failed to create temporary directory for Chrome user data.");
     }
+
+    System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
+    System.setProperty("webdriver.chrome.verboseLogging", "true");
+
+    driver = new ChromeDriver(options);
+}
 
     public void waitForLoaderToDisappear(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

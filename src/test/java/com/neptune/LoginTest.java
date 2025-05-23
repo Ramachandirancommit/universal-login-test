@@ -30,24 +30,29 @@ public class LoginTest {
     private final String PASSWORD = "F!khan@804621";
 
    @BeforeTest
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
+public void setup() {
+    WebDriverManager.chromedriver().setup();
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--remote-allow-origins=*");
-        
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--no-sandbox");
+    options.addArguments("--disable-dev-shm-usage");
+    options.addArguments("--disable-gpu");
+    options.addArguments("--remote-allow-origins=*");
 
+    try {
         Path tempDir = Files.createTempDirectory("chrome_user_data_");
         options.addArguments("--user-data-dir=" + tempDir.toString());
-
-        System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
-        System.setProperty("webdriver.chrome.verboseLogging", "true");
-
-        driver = new ChromeDriver(options);
+    } catch (IOException e) {
+        e.printStackTrace();
+        throw new RuntimeException("Failed to create temporary directory for Chrome user data.");
     }
+
+    System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
+    System.setProperty("webdriver.chrome.verboseLogging", "true");
+
+    driver = new ChromeDriver(options);
+}
+
 
 
     // ✅ Add this reusable method
