@@ -75,6 +75,13 @@ public class InvalidLoginTest {
 
         assertTrue(errorMessage.isDisplayed());
     }
+    try {
+    // the line of code that throws IOException
+} catch (IOException e) {
+    e.printStackTrace(); // or handle it appropriately
+}
+
+
 
     @AfterTest
     public void teardown() {
