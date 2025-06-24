@@ -48,7 +48,7 @@ public class LoginTest {
                 ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[text()='Dashboard']"))
         );
         assertTrue(dashboardHeader.isDisplayed(), "Dashboard should be visible after login.");
-        System.out.println("hello");
+        
     }
 
     @AfterClass
