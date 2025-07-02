@@ -28,6 +28,10 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
         google-chrome --version  # Log version for debugging
-        
+      
+
     - name: Run Tests
       run: mvn clean test
+
+    - name: Upload HTML Report Artifact
+      uses: actions/upload-artifact@v3
